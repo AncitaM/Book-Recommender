@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+        .navbar {
+            background-color: #E0DFDB;
+            height: 80px; /* Increased height */
+            padding-top: 15px; /* Added padding */
+        }
+        .navbar-brand {
+            font-size: 24px; /* Increased font size */
+        }
+        .form-control {
+            border: 1px solid #00a65a; /* Added border */
+            border-radius: 5px; /* Rounded corners */
+            color: #333; /* Dark text color */
+        }
+        .btn-warning {
+            background-color: #ff9f00; /* Changed button color */
+            border: none; /* Removed border */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .btn-warning:hover {
+            background-color: #ffbf00; /* Hover color */
+        }
+        .card {
+            background-color: #333;
+            border: 1px solid #00a65a;
+            border-radius: 10px;
+            margin-top: 50px;
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Align children vertically */
+            align-items: center; /* Center items horizontally */
+        }
+        .card img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px; /* Add margin to separate image from text */
+        }
+        .card-body {
+            padding: 20px;
+            text-align: center; /* Center text within the card */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">My Book Recommender</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+                <li><a>Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="font-size: 50px;">Recommend Books</h1>
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter book title"><br>
+                    <button type="submit" class="btn btn-lg btn-warning">Submit</button>
+                </form>
+            </div>
+
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ i[2] }}">
+                            <div class="card-body">
+                                <p>{{ i[0] }}</p>
+                                <h4>{{ i[1] }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>
